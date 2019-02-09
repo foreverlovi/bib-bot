@@ -29,10 +29,10 @@ var bot = new Discord.Client({
 bot.on('ready', function (evt) {
     logger.info('bib is now online!');
     bot.setPresence({
-	game: {
-	   name: 'ex: bib weather :canada;',
-           type: 0
-	}
+		game: {
+		   name: 'ex: bib weather :canada;',
+			   type: 0
+		}
     });
 });
 function getJSON(url) {
@@ -56,11 +56,15 @@ function getJSON(url) {
 
 bot.on('message', function (user, userID, channelID, message, event) {
     if(message.toLowerCase() == "bib features"){
-	var info = 'hey there\ni have many functions and features\nsince u asked for them here u go:\n1. bib **weather** :yourplace;\n2. **bib-racer**, a typing game\n  - bib join race\n  - bib leave race\n  - bib start race (which is a vote)\n3. **magic 8 ball** predicts an answer for any question like:\n  - bib am i cool\n  - bib am i smart\n  - bib is ken retarded\n4. **roasts**, roast your friends\n5. **human-like messages**, like responding to someone when they:\n  - ping themselves\n  - ping bill\n  - try to roast bib or bill\n6. **random image generation** gives u a random image\n7. punishing kids and muting kids who misbehave';
-	bot.sendMessage({
-	    to: userID,
-	    message: info
-	});
+		var info = 'hey there\ni have many functions and features\nsince u asked for them here u go:\n1. bib **weather** :yourplace;\n2. **bib-racer**, a typing game\n  - bib join race\n  - bib leave race\n  - bib start race (which is a vote)\n3. **magic 8 ball** predicts an answer for any question like:\n  - bib am i cool\n  - bib am i smart\n  - bib is ken retarded\n4. **roasts**, roast your friends\n5. **human-like messages**, like responding to someone when they:\n  - ping themselves\n  - ping bill\n  - try to roast bib or bill\n6. **random image generation** gives u a random image\n7. punishing kids and muting kids who misbehave';
+		bot.sendMessage({
+			to: userID,
+			message: info
+		});
+		bot.sendMessage({
+			to: channelID,
+			message: '<@' + userID + '> check ur dms'
+		});
     }
 });
 
@@ -140,13 +144,13 @@ if(channelID == racerchannel){
            	});
 	    }
 	    if(votestart.includes(userID)){
-		votestart.pop(votestart.indexOf(userID));
+			votestart.pop(votestart.indexOf(userID));
 	    }
 
 	    bot.sendMessage({
-                to: channelID,
-                message: '[' + typers.length + '/5 racers]'
-            });
+            to: channelID,
+            message: '[' + typers.length + '/5 racers]'
+        });
 	    bot.sendMessage({
                 to: channelID,
                 message: '<@' + userID + "> left the race"
