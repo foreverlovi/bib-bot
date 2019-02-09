@@ -344,7 +344,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     message: '<@' + userID + '> ' + sendmessage
            	});
 	    } catch(err) {
-		if(message.includes(":") && message.includes(";")){
+		if(message.includes(":") && message.includes(";") && message.indexOf(":") < message.indexOf(";")){
 		    bot.sendMessage({
                         to: channelID,
                         message: '<@' + userID + '> ' + 'u sure thats a place? lol ' + '"' + place + '"'
