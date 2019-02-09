@@ -417,5 +417,3 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 	}
      }
 });
-
-bot.login(process.env.token);
