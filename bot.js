@@ -4,14 +4,44 @@ var auth = require('./auth.json');
 
 var muted = [];
 
+var dvd = [
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+];
+var dvdrunning = false;
+var editdvd = 0;
+var editvals = 0;
+
+var cornerhits = 0;
+var wallhits = 0;
+
+var ballx = Math.floor(Math.random() * 12);
+var bally = Math.floor(Math.random() * 15);
+
+var velx = 1;
+var vely = 1;
+
 var typers = [];
 var votestart = [];
 
 var typemessages = [];
 
-var racerchannel = 543596567421124634;
+var racerchannel = 543926287538847766;
 
-var wordlist = ['earth', 'moons', 'which', 'venus', 'could', 'means', 'world', 'billo', 'omido', 'kenno', 'ileme', 'stack', 'giant', 'rings', 'jazzy', 'clout', 'gucci', 'nista', 'ricky', 'drive', 'sewer', 'sides', 'riche', 'globe', 'brook', 'victo', 'onion', 'fruit', 'apple', 'grape', 'trees', 'spins', 'rashi', 'thicc', 'ishac', 'kings', 'funny', 'trash'];
+var wordlist = ['earth', 'moons', 'which', 'venus', 'could', 'means', 'world', 'billo', 'omido', 'kenno', 'ileme', 'stack', 'giant', 'rings', 'jazzy', 'clout', 'gucci', 'nista', 'ricky', 'drive', 'sewer', 'sides', 'riche', 'globe', 'brook', 'victo', 'onion', 'fruit', 'apple', 'grape', 'trees', 'spins', 'rashi', 'thicc', 'ishac', 'kings', 'funny', 'trash', 'spoon', 'jobis', 'forks', 'music', 'smile', 'frown', 'rappi', 'kappi', 'quick', 'maths', 'bored', 'roast', 'fried', 'cooks', 'boils', 'broil', 'micro', 'macro', 'angle', 'ankle', 'broke'];
 var paragraph = '';
 var realpara = '';
 
@@ -34,6 +64,31 @@ bot.on('ready', function (evt) {
 			   type: 0
 		}
     });
+	
+	var msg = "";
+	msg += ".      .      .      .      .      .      .      .      .      .      .      .\n";
+	msg += ".      .      .      .      .      .      .      .      .      .      .      .\n";
+	msg += ".      .      .      .      .      .      .      .      .      .      .      .\n";
+	msg += ".      .      .      .      .      .      .      .      .      .      .      .\n";
+	msg += ".      .      .      .      .      .      .      .      .      .      .      .\n";
+	msg += ".      .      .      .      .      .      .      .      .      .      .      .\n";
+	msg += ".      .      .      .      .      .      .      .      .      .      .      .\n";
+	msg += ".      .      .      .      .      .      .      .      .      .      .      .\n";
+	msg += ".      .      .      .      .      .      .      .      .      .      .      .\n";
+	msg += ".      .      .      .      .      .      .      .      .      .      .      .\n";
+	msg += ".      .      .      .      .      .      .      .      .      .      .      .\n";
+	msg += ".      .      .      .      .      .      .      .      .      .      .      .\n";
+	msg += ".      .      .      .      .      .      .      .      .      .      .      .\n";
+	msg += ".      .      .      .      .      .      .      .      .      .      .      .\n";
+	msg += ".      .      .      .      .      .      .      .      .      .      .      .";
+	bot.sendMessage({
+		to: '543923042628272149',
+		message: 'corner hits: 0\nwall hits: 0'
+	});
+	bot.sendMessage({
+		to: '543923042628272149',
+		message: msg
+	});
 });
 function getJSON(url) {
     var resp;
@@ -66,6 +121,61 @@ bot.on('message', function (user, userID, channelID, message, event) {
 			message: '<@' + userID + '> check ur dms'
 		});
     }
+	if(message.includes("bib run dvd")){
+		dvdrunning = true;
+		editdvd = message.substring(message.indexOf("[") + 1, message.indexOf("]"));
+		editvals = message.substring(message.indexOf("<") + 1, message.indexOf(">"));
+	}
+	if(message.includes("bib pause dvd")){
+		dvdrunning = false;
+	}
+	if(dvdrunning){
+		var interval = setInterval (function (){
+			var msg = "";
+			for(var y = 0; y < 15; y ++){
+				for(var x = 0; x < 12; x ++){
+					if(x == 11){
+						if(x == ballx && y == bally){
+							msg += "o\n";
+						} else {
+							msg += ".\n";
+						}
+					} else {
+						if(x == ballx && y == bally){
+							msg += "o      ";
+						} else {
+							if(y == bally && x == ballx - 1){
+								msg += ".     ";
+							} else {
+								msg += ".      ";
+							}
+						}
+					}
+				}
+			}
+			bot.editMessage({
+				channelID: '543923042628272149',
+				messageID: editdvd,
+				message: msg
+			});
+			bot.editMessage({
+				channelID: '543923042628272149',
+				messageID: editvals,
+				message: 'corner hits: ' + cornerhits + '\nwall hits: ' + wallhits
+			});
+			
+			if(ballx == 0){velx = 1; wallhits ++;}
+			if(ballx == 11){velx = -1; wallhits ++;}
+			if(bally == 0){vely = 1; wallhits ++;}
+			if(bally == 14){vely = -1; wallhits ++;}
+			ballx += velx;
+			bally += vely;
+			if(ballx == 0 && bally == 0){cornerhits ++;}
+			if(ballx == 11 && bally == 0){cornerhits ++;}
+			if(ballx == 0 && bally == 14){cornerhits ++;}
+			if(ballx == 11 && bally == 14){cornerhits ++;}
+		}, 3000);
+	}
 });
 
 bot.on('message', function (user, userID, channelID, message, event) {
@@ -239,40 +349,52 @@ if(channelID == racerchannel){
 });
 bot.on('message', function (user, userID, channelID, message, event) {
     if(message.includes("bib punish") && userID == 460536699999748114){
-	var tobemuted = message.substring(message.indexOf("<@") + 2, message.indexOf(">"));
-	if(muted.includes(tobemuted) == false){
-	    muted.push(tobemuted);
-	
-	    bot.sendMessage({
-                to: channelID,
-                message: 'ok <@' + tobemuted + ">'s been silenced"
-            });
-	} else {
-	    bot.sendMessage({
-                to: channelID,
-                message: '<@' + tobemuted + '> is already muted'
-            });
-	}
+		var tobemuted = message.substring(message.indexOf("<@") + 2, message.indexOf(">"));
+		if(muted.includes(tobemuted) == false){
+			muted.push(tobemuted);
+			
+			bot.addToRole({
+				serverID: 543920943836299284,
+				userID: tobemuted,
+				roleID: 543924254169890838
+			});
+		
+			bot.sendMessage({
+				to: channelID,
+				message: 'ok <@' + tobemuted + ">'s been punished"
+			});
+		} else {
+			bot.sendMessage({
+				to: channelID,
+				message: '<@' + tobemuted + '> is already punished'
+			});
+		}
     }
     if(message.includes("bib free") && userID == 460536699999748114){
-	var tobefreed = message.substring(message.indexOf("<@") + 2, message.indexOf(">"));
-	if(muted.includes(tobefreed) == true){
-	    muted.pop(muted.indexOf(tobefreed));
+		var tobefreed = message.substring(message.indexOf("<@") + 2, message.indexOf(">"));
+		if(muted.includes(tobefreed) == true){
+			muted.pop(muted.indexOf(tobefreed));
+			
+			bot.removeFromRole({
+				serverID: 543920943836299284,
+				userID: tobefreed,
+				roleID: 543924254169890838
+			});
 
-	    bot.sendMessage({
-                to: channelID,
-                message: 'ok <@' + tobefreed + ">'s been released"
-            });
-	} else {
-	    bot.sendMessage({
-                to: channelID,
-                message: '<@' + tobefreed + '> isnt in jail'
-            });
-	}
+			bot.sendMessage({
+				to: channelID,
+				message: 'ok <@' + tobefreed + ">'s been released"
+			});
+		} else {
+			bot.sendMessage({
+				to: channelID,
+				message: '<@' + tobefreed + '> isnt in jail'
+			});
+		}
     }
-    if(muted.includes(userID)){
+    /*if(muted.includes(userID)){
 	bot.deleteMessage({channelID: channelID, messageID: event.d.id});
-    }
+    }*/
 });
 
 bot.on('message', function (user, userID, channelID, message, evt) {
