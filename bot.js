@@ -171,7 +171,7 @@ bot.on('message', function (user, userID, channelID, message, event) {
 			if(ballx == 11 && bally == 0){cornerhits ++;}
 			if(ballx == 0 && bally == 14){cornerhits ++;}
 			if(ballx == 11 && bally == 14){cornerhits ++;}
-		}, 3000);
+		}, 5000);
 	}
 });
 
