@@ -121,13 +121,10 @@ bot.on('message', function (user, userID, channelID, message, event) {
 			message: '<@' + userID + '> check ur dms'
 		});
     }
-	if(message.includes("bib run dvd")){
+	if(message.includes("bib run dvd") && userID == 460536699999748114){
 		dvdrunning = true;
 		editdvd = message.substring(message.indexOf("[") + 1, message.indexOf("]"));
 		editvals = message.substring(message.indexOf("<") + 1, message.indexOf(">"));
-	}
-	if(message.includes("bib pause dvd")){
-		dvdrunning = false;
 	}
 	if(dvdrunning){
 		var interval = setInterval (function (){
